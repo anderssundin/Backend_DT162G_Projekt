@@ -44,4 +44,40 @@ router.post('/newUser', async function (req, res) {
   }
 });
 
+
+
+// USER LOGIN
+router.post('/login', async function (req, res) {
+
+  // Get email and password
+  const { email, password } = req.body;
+
+  // See if email exists in database
+  const user = await User.findOne({ email: email });
+
+  if (!user) {
+    return res.status(404).json({ message: 'Eposten finns inte i databasen' });
+  }
+
+  // See if password matches
+  const validateUser = await bcrypt.compare(password, user.password);
+
+  if (validateUser) {
+    return res.status(200).json({
+      id: user._id,
+      name: user.name,
+      startWeight: user.startWeight,
+      goalWeight: user.goalWeight,
+      createdAt: user.createdAt
+
+    });
+  } else {
+    // If password is wrong
+    return res.status(401).json({ message: 'Felaktigt lösenord' });
+  }
+});
+
+
+
+
 module.exports = router;
