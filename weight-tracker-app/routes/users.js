@@ -10,12 +10,15 @@ router.get('/', async function (req, res, next) {
 
 
 
+//--------------------
 // ADD NEW USER
+//--------------------
 
 router.post('/newUser', async function (req, res) {
 
   // save data to variabel from req to send to db.
   const { name, email, password, startWeight, goalWeight } = req.body;
+
   try {
 
     // see if user already exists
@@ -46,7 +49,9 @@ router.post('/newUser', async function (req, res) {
 
 
 
+//--------------------
 // USER LOGIN
+//--------------------
 router.post('/login', async function (req, res) {
 
   // Get email and password
@@ -78,6 +83,32 @@ router.post('/login', async function (req, res) {
 });
 
 
+//--------------------
+// UPDATE WEIGHTS
+//--------------------
 
+router.put('/update', async function (req, res) {
+
+  // store variables
+  const { userEmail, startWeight, goalWeight } = req.body;
+
+  try {
+    const updatedUser = await User.findOneAndUpdate(
+      { email: userEmail },
+      { $set: { startWeight: startWeight, goalWeight: goalWeight } },
+      //return document
+      { new: true } 
+    );
+      // if wrong email
+    if (!updatedUser) {
+     
+      return res.status(404).json({ message: 'Användaren hittades inte' });
+    }
+    res.status(200).json({message: "Lyckad uppdatering"});
+  }
+  catch (error) {
+    res.status(500).json({ message: "Fel vid ändring av användarens vikt och viktmål" });
+  }
+});
 
 module.exports = router;
