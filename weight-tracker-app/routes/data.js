@@ -43,6 +43,22 @@ catch (error) {
 }
 });
 
+//-------------------------
+// GET LATEST MEASUREMENT
+//-------------------------
+
+router.post('/userLast', async function (req, res) {
+  const {userEmail} = req.body;
+
+  try{
+    const measurement = await Measurement.find({userEmail: userEmail}).sort({timestamp: -1}).limit(1);
+  }
+  catch (error) {
+    console.log(error);
+    return res.status(500).json({message: "Hämtning misslyckades"});
+    }
+});
+
 
 //--------------------
 // FETCH ALL (EMAIL)

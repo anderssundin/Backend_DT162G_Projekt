@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const cors = require('cors');
 
 // Import database connection
 const mongoose = require ('./database');
@@ -12,6 +13,8 @@ var usersRouter = require('./routes/users');
 var dataRouter =  require('./routes/data');
 var app = express();
 
+//use cors
+app.use(cors());
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');

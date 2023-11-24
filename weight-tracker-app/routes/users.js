@@ -70,6 +70,7 @@ router.post('/login', async function (req, res) {
   if (validateUser) {
     return res.status(200).json({
       id: user._id,
+      email: user.email,
       name: user.name,
       startWeight: user.startWeight,
       goalWeight: user.goalWeight,
