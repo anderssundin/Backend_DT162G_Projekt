@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon node ./bin/www"
+    "start": "node ./bin/www"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
@@ -16,6 +16,6 @@
     "jade": "~1.11.0",
     "mongoose": "^8.0.1",
     "morgan": "~1.9.1",
-    "nodemon": "^3.0.1"
+   
   }
 }
