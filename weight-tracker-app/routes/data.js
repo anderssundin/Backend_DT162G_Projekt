@@ -9,12 +9,13 @@ const Measurement = require('../Schemas/measurement');
 // NEW MEASUREMENT
 //--------------------
 router.post('/', async function (req, res, next) {
-  const { userEmail, weight } = req.body;
+  const { userEmail, weight, timestamp } = req.body;
   
   try{
   const measurement = await Measurement.create({
     weight: weight,
-    userEmail: userEmail
+    userEmail: userEmail,
+    timestamp: timestamp
   });
 
   res.status(201).json(measurement);
@@ -52,6 +53,7 @@ router.post('/userLast', async function (req, res) {
 
   try{
     const measurement = await Measurement.find({userEmail: userEmail}).sort({timestamp: -1}).limit(1);
+    res.status(200).json(measurement);
   }
   catch (error) {
     console.log(error);
@@ -83,10 +85,10 @@ router.post('/userall', async function (req, res) {
 //--------------------
 
 router.put('/update', async function (req, res) {
-  const { id, timestamp, weight } = req.body;
+  const { id, weight } = req.body;
 
   try {
-  const updatedData = await Measurement.updateOne({_id: id}, {$set: {weight: weight, timestamp: timestamp}});
+  const updatedData = await Measurement.updateOne({_id: id}, {$set: {weight: weight}});
   res.status(200).json({message: "Värden uppdaterade"});
 }
 catch (error) {
