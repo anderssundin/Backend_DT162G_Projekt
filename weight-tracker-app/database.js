@@ -14,4 +14,4 @@ db.once('open', () => {
 
 // Export mongoose object
 
-module.exports = mongoose;
+module.exports = mongoose; 
