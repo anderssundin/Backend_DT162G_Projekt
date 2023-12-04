@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-//import schema
+//import Model
 const Measurement = require('../Schemas/measurement');
 /* DATA FOR LOGGING */
 

@@ -4,8 +4,8 @@ const bcrypt = require('bcrypt');
 const User = require('../Schemas/users');
 /* GET users listing. */
 router.get('/', async function (req, res, next) {
-  const users = await User.find({});
-  res.status(200).json(users);
+  
+  res.status(200).json({message: "Ditt apianrop fungerar!"});
 });
 
 
