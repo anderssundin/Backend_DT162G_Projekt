@@ -1,6 +1,7 @@
+require('dotenv').config();
 const mongoose = require('mongoose');
 // Connect to the database with mongoose
-mongoose.connect("mongodb+srv://anderssundin:C0ZaamQKRECzYOpK@cluster0.qxf9kh9.mongodb.net/WT?retryWrites=true&w=majority");
+mongoose.connect(process.env.MONGODB_URI);
 // Handle errors and sucess with connection to database 
 const db = mongoose.connection;
 
